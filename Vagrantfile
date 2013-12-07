@@ -13,65 +13,50 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-10.211.55.100   n0
-10.211.55.101   n1
-10.211.55.102   n2
-10.211.55.103   n3
-10.211.55.104   n4
-10.211.55.105   n5
+10.211.55.100   node0
+10.211.55.101   node1
+10.211.55.102   node2
+10.211.55.103   node3
+10.211.55.104   node4
+10.211.55.105   node5
+10.211.55.106   node6
+10.211.55.107   node7
+10.211.55.108   node8
+10.211.55.109   node9
 EOF
 
 echo "Script done..."
 SCRIPT
 
+
+server_count = 3
+network = '10.211.55.'
+first_ip = 100
+
+servers = []
+(-1..server_count-1).each do |i|
+  name = 'node' + (i + 1).to_s
+  ip = network + (first_ip + i).to_s
+  servers << {:name => name, :ip => ip,}
+end
+
 Vagrant.configure("2") do |config|
 
-  config.vm.define :master do |master|
-  	master.vm.box = "precise64"
-    master.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    master.vm.provider :virtualbox do |v|
-      v.name = "n0"
-      v.customize ["modifyvm", :id, "--memory", "1024"]
-    end
-    master.vm.network :private_network, ip: "10.211.55.100"
-    master.vm.hostname = "n0"
-    master.vm.provision :shell, :inline => $master_script
-  end
+  servers.each do |options|
 
-  config.vm.define :slave1 do |slave1|
-  	slave1.vm.box = "precise64"
-    slave1.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    slave1.vm.provider :virtualbox do |v|
-      v.name = "n1"
-      v.customize ["modifyvm", :id, "--memory", "1024"]
+    config.vm.define "#{options[:name]}" do |node|
+      node.vm.box = "precise64"
+      node.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+      node.vm.provider :virtualbox do |v|
+        v.name = "#{options[:name]}"
+        v.customize ["modifyvm", :id, "--memory", "1024"]
+      end
+      node.vm.network :private_network, ip: "#{options[:ip]}"
+      node.vm.hostname = "#{options[:name]}"
+      node.vm.provision :shell, :inline => $master_script
     end
-    slave1.vm.network :private_network, ip: "10.211.55.101"
-    slave1.vm.hostname = "n1"
-    slave1.vm.provision :shell, :inline => $master_script
-  end
 
-  config.vm.define :slave2 do |slave2|
-  	slave2.vm.box = "precise64"
-    slave2.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    slave2.vm.provider :virtualbox do |v|
-      v.name = "n2"
-      v.customize ["modifyvm", :id, "--memory", "1024"]
-    end
-    slave2.vm.network :private_network, ip: "10.211.55.102"
-    slave2.vm.hostname = "n2"
-    slave2.vm.provision :shell, :inline => $master_script
-  end
 
-  config.vm.define :slave3 do |slave3|
-  	slave3.vm.box = "precise64"
-    slave3.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    slave3.vm.provider :virtualbox do |v|
-      v.name = "n3"
-      v.customize ["modifyvm", :id, "--memory", "1024"]
-    end
-    slave3.vm.network :private_network, ip: "10.211.55.103"
-    slave3.vm.hostname = "n3"
-    slave3.vm.provision :shell, :inline => $master_script
   end
 
 end
