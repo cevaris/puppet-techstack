@@ -1,2 +1,4 @@
 .vagrant
 vagrant-env.sh
+keys/
+boxes/
