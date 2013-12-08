@@ -61,10 +61,10 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "#{options[:name]}" do |node|
       
-      node.vm.box = "precise64web"
-      node.vm.box_url = "boxes/precise64web.box"
-      # node.vm.box = "precise64"
-      # node.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+      # node.vm.box = "precise64web"
+      # node.vm.box_url = "boxes/precise64web.box"
+      node.vm.box = "precise64"
+      node.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
       
       node.vm.provider :virtualbox do |v|
         v.name = "#{options[:name]}"
