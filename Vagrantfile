@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
 
       node.vm.network :private_network, ip: "#{options[:ip]}"
       node.vm.hostname = "#{options[:name]}"
-      # node.vm.provision :shell, :inline => $provision_script
+      node.vm.provision :shell, :inline => $provision_script
 
     end
 
