@@ -1,4 +1,4 @@
-vagrant-web
+Puppet WebStatck
 ================
 
-Scalable web deployment for stateless web site.
+Web deployment and misc. services.

@@ -14,7 +14,7 @@ sudo apt-get update
 info "... done updating"
 
 info "Installing prerequisites"
-sudo apt-get install unzip vim build-essential -y
+sudo apt-get install unzip vim build-essential git-core curl -y
 touch ~/.bash_profile
 info "...done"
 
@@ -30,20 +30,24 @@ info "Redis installation..."
 ./install-redis.sh
 info "done"
 
-
 info "ElastiSearch installation..."
 ./install-elasticsearch.sh
 info "done"
-
 
 info "Kafka installation..."
 ./install-kafka.sh
 info "done"
 
+info "Postgresql installation..."
+./install-postgresql.sh
+info "done"
+
+info "Nginx installation..."
+./install-nginx.sh
+info "done"
 
 
-
-
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 
 
