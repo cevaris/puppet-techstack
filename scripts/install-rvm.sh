@@ -8,7 +8,10 @@ function info {
 }
 
 info "Updtaing..."
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
+\curl -L https://get.rvm.io |  bash -s stable --ruby --autolibs=enable --auto-dotfiles
+source ~/.rvm/scripts/rvm
+rvm reload
+rvm use default
+ruby --version
+rvm install ruby-2.0.0
 info "...done"
-
-
