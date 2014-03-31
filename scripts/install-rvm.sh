@@ -14,4 +14,5 @@ rvm reload
 rvm use default
 ruby --version
 rvm install ruby-2.0.0
+rvm use ruby-2.0.0
 info "...done"
