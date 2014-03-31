@@ -7,6 +7,8 @@ function info {
   printf "\e[32m$1\n\033[0m"
 }
 
-info "Installing Java 7"
-sudo apt-get install openjdk-7-jdk openjdk-7-jre -y
+
+
+info "Installing postgresql"
+sudo apt-get install postgresql postgresql-contrib -y
 info "...done"

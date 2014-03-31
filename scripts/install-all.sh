@@ -39,3 +39,11 @@ info "done"
 info "Kafka installation..."
 ./install-kafka.sh
 info "done"
+
+
+
+
+
+
+
+
