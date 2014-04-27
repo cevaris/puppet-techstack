@@ -10,5 +10,5 @@ function info {
 
 
 info "Installing postgresql"
-sudo apt-get install postgresql postgresql-contrib -y
+sudo apt-get install libpq-dev postgresql postgresql-contrib -y
 info "...done"

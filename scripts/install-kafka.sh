@@ -8,23 +8,27 @@ function info {
 }
 
 ORIGIN_DIR=$(pwd)
-VERSION=0.8.1
+VERSION=0.7.2
 ROOT_DIR=/usr/local
 
 info "Download Kafka..."
-wget http://www.us.apache.org/dist/kafka/$VERSION/kafka_2.8.0-$VERSION.tgz
-tar xzf kafka_2.8.0-$VERSION.tgz
-rm kafka_2.8.0-$VERSION.tgz
+wget http://archive.apache.org/dist/kafka/old_releases/kafka-$VERSION-incubating/kafka-$VERSION-incubating-src.tgz
+tar xzf kafka-$VERSION-incubating-src.tgz
+rm kafka-$VERSION-incubating-src.tgz
 info "done"
 
 info "Preparing for Kafka installation..."
-sudo rm -r $ROOT_DIR/kafka_2.8.0-$VERSION
+sudo rm -r $ROOT_DIR/kafka-$VERSION-incubating-src
 sudo mkdir -p $ROOT_DIR
 info "done"
 
 info "Moving Kafka to $ROOT_DIR..."
-sudo mv kafka_2.8.0-$VERSION $ROOT_DIR
-sudo ln -sfn $ROOT_DIR/kafka_2.8.0-$VERSION $ROOT_DIR/kafka
+sudo mv kafka-$VERSION-incubating-src $ROOT_DIR
+sudo ln -sfn $ROOT_DIR/kafka-$VERSION-incubating-src $ROOT_DIR/kafka
+info "done"
+
+info "Configuring Kafka to $ROOT_DIR..."
+sudo cp $ROOT_DIR/kafka-$VERSION-incubating-src/config/server.properties $ROOT_DIR/kafka-$VERSION-incubating-src/config/server1.properties
 info "done"
 
 

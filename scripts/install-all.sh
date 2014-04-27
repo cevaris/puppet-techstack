@@ -14,7 +14,7 @@ sudo apt-get update
 info "... done updating"
 
 info "Installing prerequisites"
-sudo apt-get install unzip vim build-essential git-core curl -y
+sudo apt-get install unzip vim build-essential git-core curl nodejs -y
 touch ~/.bash_profile
 info "...done"
 
