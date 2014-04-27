@@ -10,20 +10,21 @@ $provision_script = %{
 
 Vagrant.configure("2") do |config|
 
-  config.vm.define name do |node|
+  config.vm.define "#{name}-web" do |node|
     
     node.vm.box = "precise64"
     node.vm.box_url = "http://goo.gl/sHRjNb"
     
     node.vm.provider :virtualbox do |v|
-      v.name = name
-      v.customize ["modifyvm", :id, '--memory', '2048']
+      v.name = "#{name}-web"
+      v.customize ["modifyvm", :id, '--memory', '4096']
     end
 
     node.vm.network :private_network, ip: ip_address
-    node.vm.hostname = name
+    node.vm.hostname = "#{name}-web"
     # node.vm.provision :shell, :inline => $provision_script
     config.vm.synced_folder "scripts/", "/dev/install"
 
   end
+
 end
