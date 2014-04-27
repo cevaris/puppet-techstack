@@ -1,7 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-ip_address = ''
+=begin
+Some notes
+http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/
+http://rogueleaderr.com/post/65157477648/the-idiomatic-guide-to-deploying-django-in-production
+
+=end
 
 $init_script = %{
 #!/bin/bash
