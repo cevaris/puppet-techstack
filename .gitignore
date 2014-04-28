@@ -1,5 +1,7 @@
 .vagrant
-vagrant-env.sh
 keys/
 boxes/
 *.log
+puppet/.*
+puppet/modules
+
