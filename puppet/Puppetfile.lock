@@ -12,7 +12,9 @@ FORGE
       puppetlabs/firewall (>= 0.0.4)
       puppetlabs/stdlib (< 5.0.0, >= 3.2.0)
     puppetlabs/stdlib (4.1.0)
+    stankevich/python (1.7.4)
 
 DEPENDENCIES
   puppetlabs/postgresql (>= 0)
+  stankevich/python (>= 0)
 
