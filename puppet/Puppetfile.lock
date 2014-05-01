@@ -12,9 +12,23 @@ FORGE
       puppetlabs/firewall (>= 0.0.4)
       puppetlabs/stdlib (< 5.0.0, >= 3.2.0)
     puppetlabs/stdlib (4.1.0)
+
+GIT
+  remote: git://github.com/puppetlabs/puppetlabs-vcsrepo.git
+  ref: master
+  sha: 46588aa62d444c5f0a538cccec357a80cd191b93
+  specs:
+    puppetlabs/puppetlabs-vcsrepo (0.2.0)
+
+GIT
+  remote: git://github.com/stankevich/puppet-python.git
+  ref: master
+  sha: 33e6b54cca73c7717b9965a083b9154dd7441b36
+  specs:
     stankevich/python (1.7.4)
 
 DEPENDENCIES
   puppetlabs/postgresql (>= 0)
+  puppetlabs/puppetlabs-vcsrepo (>= 0)
   stankevich/python (>= 0)
 
