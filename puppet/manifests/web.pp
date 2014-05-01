@@ -1,18 +1,30 @@
-
-
-# class { 'python':
-#   version    => 'system',
-#   pip => true,
-#   virtualenv => true,
-#   gunicorn   => true,
+# exec { 'apt-update':
+#   command => 'apt-get update',
+#   path    => '/usr/bin'
 # }
 
-# python::gunicorn { 'vhost':
-#   ensure      => present,
-#   virtualenv  => '/var/www/project1',
-#   mode        => 'wsgi',
-#   dir         => '/var/www/project1/current',
-#   bind        => 'unix:/tmp/gunicorn.socket',
-#   environment => 'prod',
-#   template    => 'python/gunicorn.erb',
+# include git
+
+# class{ 'git':
+#   svn => 'installed',
+#   gui => 'installed',
+# }
+
+class { 'python':
+  version    => 'system',
+  pip        => true,
+  virtualenv => true,
+  gunicorn   => true,
+}
+
+vcsrepo { '/var/www/django_sample':
+  ensure   => present,
+  provider => git,
+  source   => 'https://github.com/cevaris/django-sample',
+}
+
+
+# git::repo{'repo_name':
+#  path   => '/var/www/django_sample',
+#  source => 'git@github.com:cevaris/django-sample.git'
 # }
