@@ -14,6 +14,13 @@ FORGE
     puppetlabs/stdlib (4.1.0)
 
 GIT
+  remote: git://github.com/nesi/puppet-git.git
+  ref: master
+  sha: 9367f919f2674ecf67bfcc5008cca909fd76f56f
+  specs:
+    nesi/puppet-git (0.1.2)
+
+GIT
   remote: git://github.com/puppetlabs/puppetlabs-vcsrepo.git
   ref: master
   sha: 46588aa62d444c5f0a538cccec357a80cd191b93
@@ -28,6 +35,7 @@ GIT
     stankevich/python (1.7.4)
 
 DEPENDENCIES
+  nesi/puppet-git (>= 0)
   puppetlabs/postgresql (>= 0)
   puppetlabs/puppetlabs-vcsrepo (>= 0)
   stankevich/python (>= 0)
