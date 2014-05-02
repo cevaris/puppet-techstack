@@ -24,7 +24,6 @@ group { 'apps':
 
 user { 'web':
     ensure => present,
-    # uid => 2001,
     gid => 'apps',
     groups => ['apps'],
     home => '/home/web',
@@ -45,11 +44,6 @@ python::virtualenv { '/home/web/django_sample':
   ensure       => present,
   version      => 'system',
   requirements => '/home/web/django_sample/requirements.txt',
-  # proxy        => 'http://proxy.domain.com:3128',
   systempkgs   => true,
-  # distribute   => false,
-  # ownero=> 'web',
-  # group        => 'apps',
   cwd          => '/home/web/django_sample',
-  # timeout      => 0,
 }
