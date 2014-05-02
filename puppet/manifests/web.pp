@@ -32,10 +32,6 @@ user { 'web':
     password => '$1$IawipmjB$OCWi4dIX15rRxMZ80hRkS/'
 }
 
-# class { 'git': }
-
-
-
 vcsrepo { '/home/web/django_sample':
   ensure   => present,
   provider => git,
@@ -44,20 +40,6 @@ vcsrepo { '/home/web/django_sample':
   group    => 'apps',
 }
 
-# file { '/var/www':
-#   recursive => true,
-#   ensure => "directory",
-#   owner  => "django",
-#   group  => "apps",
-#   mode   => 755,
-# }
-
-
-# python::requirements { '/home/web/django_sample/requirements.txt':
-#   virtualenv => '/home/web/django_sample',
-#   owner      => 'web',
-#   group      => 'apps',
-# }
 
 python::virtualenv { '/home/web/django_sample':
   ensure       => present,
