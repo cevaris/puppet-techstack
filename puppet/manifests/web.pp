@@ -30,7 +30,7 @@ user { 'web':
     groups   => ['apps'],
     home     => '/home/web',
     shell    => '/bin/bash',
-    password => '$1$IawipmjB$OCWi4dIX15rRxMZ80hRkS/',
+    password => '$1$Armn0XkE$7rsVorlFtEYmzAxtT9hNg/',
 }->
 package {
  'git': ensure => "installed" 
@@ -54,6 +54,8 @@ python::virtualenv { '/home/web/django_sample':
   requirements => '/home/web/django_sample/requirements.txt',
   systempkgs   => true,
   cwd          => '/home/web/django_sample',
+  owner    => 'web',
+  group    => 'apps',
 }
 
 
