@@ -1,42 +1,53 @@
-exec { 'apt-update':
-  command => 'apt-get update',
-  path    => '/usr/bin'
+
+stage { 'preinstall':
+  before => Stage['main']
 }
 
-package { 'vim': ensure => "installed" }
+class apt_get_update {
+  exec { 'apt-update':
+    command => 'apt-get update',
+    path    => '/usr/bin'
+  }
+}
 
-
-class { 'python':
-  version    => 'system',
-  pip        => true,
-  virtualenv => true,
-  gunicorn   => true,
+class { 'apt_get_update':
+  stage => preinstall
 }
 
 
-group { 'apps': ensure => "present", }
 
+
+
+
+
+
+group { 
+  'apps': ensure => "present",
+}->
 user { 'web':
     ensure   => present,
     gid      => 'apps',
     groups   => ['apps'],
     home     => '/home/web',
     shell    => '/bin/bash',
-    password => '$1$IawipmjB$OCWi4dIX15rRxMZ80hRkS/'
-    before   => 'apps'
-}
-
-package { 'git': ensure => "installed" }
+    password => '$1$IawipmjB$OCWi4dIX15rRxMZ80hRkS/',
+}->
+package {
+ 'git': ensure => "installed" 
+}->
 vcsrepo { '/home/web/django_sample':
   ensure   => present,
   provider => git,
   source   => 'https://github.com/cevaris/django-sample',
   owner    => 'web',
   group    => 'apps',
-  before   => ''
-}
-
-
+}->
+class { 'python':
+  version    => 'system',
+  pip        => true,
+  virtualenv => true,
+  gunicorn   => true,
+}->
 python::virtualenv { '/home/web/django_sample':
   ensure       => present,
   version      => 'system',
