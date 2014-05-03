@@ -3,11 +3,7 @@ exec { 'apt-update':
   path    => '/usr/bin'
 }
 
-$defaults = [ 'vim', 'git']
-package { $defaults: ensure => "installed" }
-
-
-include postgresql::client
+package { 'vim': ensure => "installed" }
 
 
 class { 'python':
@@ -18,25 +14,26 @@ class { 'python':
 }
 
 
-group { 'apps':
-  ensure => "present",
-}
+group { 'apps': ensure => "present", }
 
 user { 'web':
-    ensure => present,
-    gid => 'apps',
-    groups => ['apps'],
-    home => '/home/web',
-    shell => '/bin/bash',
+    ensure   => present,
+    gid      => 'apps',
+    groups   => ['apps'],
+    home     => '/home/web',
+    shell    => '/bin/bash',
     password => '$1$IawipmjB$OCWi4dIX15rRxMZ80hRkS/'
+    before   => 'apps'
 }
 
+package { 'git': ensure => "installed" }
 vcsrepo { '/home/web/django_sample':
   ensure   => present,
   provider => git,
   source   => 'https://github.com/cevaris/django-sample',
   owner    => 'web',
   group    => 'apps',
+  before   => ''
 }
 
 
@@ -47,3 +44,6 @@ python::virtualenv { '/home/web/django_sample':
   systempkgs   => true,
   cwd          => '/home/web/django_sample',
 }
+
+
+include postgresql::client
