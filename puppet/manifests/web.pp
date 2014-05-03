@@ -43,19 +43,22 @@ vcsrepo { '/home/web/django_sample':
   group    => 'apps',
 }->
 class { 'python':
-  version    => 'system',
   pip        => true,
   virtualenv => true,
   gunicorn   => true,
 }->
-python::virtualenv { '/home/web/django_sample':
-  ensure       => present,
+python::virtualenv { '/home/web/django_sample/venv':
   version      => 'system',
-  requirements => '/home/web/django_sample/requirements.txt',
   systempkgs   => true,
   cwd          => '/home/web/django_sample',
-  owner    => 'web',
-  group    => 'apps',
+  owner        => 'web',
+  group        => 'apps',
+}->
+python::requirements { '/home/web/django_sample/requirements.txt':
+  virtualenv => '/home/web/django_sample/venv',
+  proxy      => '/home/web/django_sample/requirements.txt',
+  owner      => 'web',
+  group      => 'apps',
 }
 
 
