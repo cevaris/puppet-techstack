@@ -34,12 +34,11 @@ class env {
 class { "env": stage => 'pre' }
 
 
-
 # Git 
 vcsrepo { '/var/www/django_sample':
   ensure   => present,
   provider => git,
-  source   => 'https://github.com/cevaris/django-sample', 
+  source   => hiera('git_repo'),
   require  => Package['git'],
 }
 

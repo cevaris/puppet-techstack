@@ -32,10 +32,13 @@ Vagrant.configure("2") do |config|
     node.vm.hostname = "alpha"
 
     node.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "puppet/manifests"
+      puppet.manifests_path = ['puppet/manifests', 'puppet/heira']
       puppet.manifest_file  = "web.pp"
       puppet.module_path = "puppet/modules"
       puppet.options = "--verbose --debug"
+
+      puppet.hiera_config_path = 'puppet/hiera/hiera.yaml'
+      puppet.working_directory = 'puppet/hiera'
     end
 
   end
