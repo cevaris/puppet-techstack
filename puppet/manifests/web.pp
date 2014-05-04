@@ -50,7 +50,7 @@ vcsrepo { '/var/www/django_sample':
 #   recurse => true,
 #   require => env
 # }->
-include postgresql::client->
+include   ->
 python::virtualenv { '/var/www/django_sample/venv':
   version      => 'system',  
   systempkgs   => true,
