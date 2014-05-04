@@ -1,18 +1,18 @@
 
-stage { 'preinstall':
-  before => Stage['main']
-}
+# stage { 'preinstall':
+#   before => Stage['main']
+# }
 
-class apt_get_update {
-  exec { 'apt-update':
-    command => 'apt-get update',
-    path    => '/usr/bin'
-  }
-}
+# class apt_get_update {
+#   exec { 'apt-update':
+#     command => 'apt-get update',
+#     path    => '/usr/bin'
+#   }
+# }
 
-class { 'apt_get_update':
-  stage => preinstall
-}
+# class { 'apt_get_update':
+#   stage => preinstall
+# }
 
 
 
@@ -39,8 +39,8 @@ vcsrepo { '/home/web/django_sample':
   ensure   => present,
   provider => git,
   source   => 'https://github.com/cevaris/django-sample',
-  owner    => 'web',
-  group    => 'apps',
+  # owner    => 'web',
+  # group    => 'apps',
 }->
 class { 'python':
   pip        => true,
@@ -48,18 +48,19 @@ class { 'python':
   gunicorn   => true,
 }->
 python::virtualenv { '/home/web/django_sample/venv':
-  version      => 'system',
+  version      => 'system',  
   systempkgs   => true,
   cwd          => '/home/web/django_sample',
-  owner        => 'web',
-  group        => 'apps',
+  # owner        => 'web',
+  # group        => 'apps',
 }->
 python::requirements { '/home/web/django_sample/requirements.txt':
   virtualenv => '/home/web/django_sample/venv',
   proxy      => '/home/web/django_sample/requirements.txt',
-  owner      => 'web',
-  group      => 'apps',
+  # owner      => 'web',
+  # group      => 'apps',
 }
 
 
 include postgresql::client
+package { 'vim': ensure => "installed" }
