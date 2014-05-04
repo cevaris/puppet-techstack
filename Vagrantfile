@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, '--memory', '1024']
     end
 
+    node.vm.network :forwarded_port, guest: 8000, host: 8000
     node.vm.network :private_network, ip: '192.168.5.100'
     node.vm.hostname = "alpha"
 
