@@ -44,28 +44,28 @@ vcsrepo { '/var/www/django_sample':
 
 
 
-# file { ['/var/www/django_sample/venv','/var/www/django_sample/venv/build']: 
-#   ensure => directory,
-#   recurse => true,
-#   require => env
-# }->
-include   ->
-python::virtualenv { '/var/www/django_sample/venv':
-  version      => 'system',  
-  systempkgs   => true,
-  cwd          => '/var/www/django_sample',
-  requirements => '/var/www/django_sample/requirements.txt',
-  require => Class['env']
-}
-# ->
-# python::gunicorn { 'vhost':
-#   ensure      => present,
-#   virtualenv  => '/var/www/django_sample/venv',
-#   mode        => 'wsgi',
-#   dir         => '/var/www/django_sample/sample',
-#   bind        => 'unix:/tmp/gunicorn.socket',
-#   environment => 'prod',
-#   template    => 'python/gunicorn.erb',
+# # file { ['/var/www/django_sample/venv','/var/www/django_sample/venv/build']: 
+# #   ensure => directory,
+# #   recurse => true,
+# #   require => env
+# # }->
+# include   ->
+# python::virtualenv { '/var/www/django_sample/venv':
+#   version      => 'system',  
+#   systempkgs   => true,
+#   cwd          => '/var/www/django_sample',
+#   requirements => '/var/www/django_sample/requirements.txt',
+#   require => Class['env']
 # }
+# # ->
+# # python::gunicorn { 'vhost':
+# #   ensure      => present,
+# #   virtualenv  => '/var/www/django_sample/venv',
+# #   mode        => 'wsgi',
+# #   dir         => '/var/www/django_sample/sample',
+# #   bind        => 'unix:/tmp/gunicorn.socket',
+# #   environment => 'prod',
+# #   template    => 'python/gunicorn.erb',
+# # }
 
 

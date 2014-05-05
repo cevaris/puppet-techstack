@@ -3,4 +3,4 @@
 :backends:
   - yaml
 :datadir:
-  - /tmp/vagrant-hiera/data
+  - /tmp/vagrant-puppet/

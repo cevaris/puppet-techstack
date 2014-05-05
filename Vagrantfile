@@ -7,10 +7,10 @@ http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supe
 http://rogueleaderr.com/post/65157477648/the-idiomatic-guide-to-deploying-django-in-production
 =end
 
-$init_script = %{
+$init_puppet = %{
 #!/bin/bash
   sudo apt-get update
-  sudo apt-get install vim -y
+  sudo apt-get install puppet -y
 }
 
 Vagrant.configure("2") do |config|
@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "alpha" do |node|
     
     node.vm.box = "precise64"
-    node.vm.box_url = "http://goo.gl/sHRjNb"
+    node.vm.box_url = "http://files.vagrantup.com/precise64.box"
     
     node.vm.provider :virtualbox do |v|
       v.name = "alpha"
@@ -31,15 +31,17 @@ Vagrant.configure("2") do |config|
     node.vm.network :private_network, ip: '192.168.5.100'
     node.vm.hostname = "alpha"
 
-    node.vm.provision :puppet do |puppet|
-      puppet.manifests_path = ['puppet/manifests', 'puppet/heira']
-      puppet.manifest_file  = "web.pp"
-      puppet.module_path = "puppet/modules"
-      puppet.options = "--verbose --debug"
+    # node.vm.provision :shell, :inline => $init_puppet
 
-      puppet.hiera_config_path = 'puppet/hiera/hiera.yaml'
-      puppet.working_directory = 'puppet/hiera'
-    end
+    # node.vm.provision :puppet do |puppet|
+    #   puppet.manifests_path = 'puppet/manifests'
+    #   puppet.manifest_file  = "web.pp"
+    #   puppet.module_path = "puppet/modules"
+    #   puppet.options = "--verbose --debug"
+
+    #   # puppet.hiera_config_path = "puppet/hiera.yaml"
+    #   # puppet.working_directory = "/tmp/vagrant-puppet-2/"
+    # end
 
   end
 
